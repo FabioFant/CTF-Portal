@@ -3,6 +3,8 @@ import { FormsModule } from '@angular/forms';
 import { Challenge } from '../../models/challenge';
 import { ChallengeService } from '../../services/challenge-service';
 import { ErrorMessage } from '../error-message/error-message';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 const defaultForm : Challenge = {
     id: -1,
@@ -14,7 +16,7 @@ const defaultForm : Challenge = {
 
 @Component({
   selector: 'app-challenge-form',
-  imports: [FormsModule, ErrorMessage],
+  imports: [FormsModule, ErrorMessage, MatInputModule, MatFormFieldModule],
   templateUrl: './challenge-form.html',
   styleUrl: './challenge-form.css',
 })
