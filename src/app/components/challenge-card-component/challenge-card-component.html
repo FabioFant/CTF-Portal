@@ -1,0 +1,13 @@
+<div class="card" style="width: 18rem;">
+  <img class="card-img-top" src="..." alt="{{ challenge().title }}">
+  <div class="card-body">
+    <h5 [ngClass]="challenge().solved ? 'text-success' : 'text-danger'" class="card-title">{{ challenge().title }}</h5>
+    <p class="card-text">{{ challenge().category | uppercase }} | Points: {{ challenge().points }}</p>
+    <p class="card-text">@if (challenge().dateAdded) {
+      {{ challenge().dateAdded | date:'dd/MM/yyyy' }}
+    } @else {
+      No date given.
+    }</p>
+    <button class="btn btn-primary" (click)="challengeSolved()">Resolve</button>
+  </div>
+</div>

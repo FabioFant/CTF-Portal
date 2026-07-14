@@ -1,0 +1,12 @@
+<div>
+    <app-challenge-form></app-challenge-form>
+    <div>
+        @for (c of challenges(); track c.id) {
+            <app-challenge-card-component [challenge]="c"
+                (onSolved)="challengeSolved($event)"></app-challenge-card-component>
+        }
+        @empty {
+            <p>Nessuna challenge trovata.</p>
+        }
+    </div>
+</div>
