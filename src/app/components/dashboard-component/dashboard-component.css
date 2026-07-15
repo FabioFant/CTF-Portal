@@ -1,0 +1,4 @@
+.challenges {
+    display: flex;
+    flex-wrap: wrap;
+}

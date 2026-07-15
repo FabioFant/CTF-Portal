@@ -1,0 +1,15 @@
+mat-chip-set {
+    margin: 0% 1rem;
+}
+
+mat-card-title {
+    display: block;
+    width: 16rem;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+button {
+    margin: 0% 0.5rem;
+}

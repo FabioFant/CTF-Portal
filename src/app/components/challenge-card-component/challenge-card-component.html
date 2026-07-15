@@ -1,13 +1,27 @@
-<div class="card" style="width: 18rem;">
-  <img class="card-img-top" src="..." alt="{{ challenge().title }}">
-  <div class="card-body">
-    <h5 [ngClass]="challenge().solved ? 'text-success' : 'text-danger'" class="card-title">{{ challenge().title }}</h5>
-    <p class="card-text">{{ challenge().category | uppercase }} | Points: {{ challenge().points }}</p>
-    <p class="card-text">@if (challenge().dateAdded) {
-      {{ challenge().dateAdded | date:'dd/MM/yyyy' }}
+<mat-card appearance="outlined">
+  <mat-card-header>
+    <mat-card-title>{{ challenge().title }}</mat-card-title>
+    <mat-card-subtitle>{{ challenge().points }}</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    @if (challenge().solved) {
+      <p style="color: green">Solved</p>
     } @else {
-      No date given.
-    }</p>
-    <button class="btn btn-primary" (click)="challengeSolved()">Resolve</button>
-  </div>
-</div>
+      <p style="color: red">Not solved</p>
+    }
+    @if (challenge().dateAdded) {
+      <p>{{ challenge().dateAdded | date: 'dd/MM/yyyy' }}</p>
+    }
+    @else {
+      <p>No date given.</p>
+    }
+  </mat-card-content>
+  <mat-card-footer>
+    <mat-chip-set>
+      <mat-chip>{{ challenge().category | uppercase}}</mat-chip>
+    </mat-chip-set>
+  </mat-card-footer>
+  <mat-card-actions>
+    <button matButton="filled" (click)="challengeSolved()">Solve</button>
+  </mat-card-actions>
+</mat-card>

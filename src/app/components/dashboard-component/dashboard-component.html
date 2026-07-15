@@ -1,12 +1,14 @@
 <div>
     <app-challenge-form></app-challenge-form>
-    <div>
+    <div class="challenges">
         @for (c of challenges(); track c.id) {
-            <app-challenge-card-component [challenge]="c"
+            @defer (on viewport) {
+                <app-challenge-card-component class="card" [challenge]="c"
                 (onSolved)="challengeSolved($event)"></app-challenge-card-component>
+            } @placeholder {
+                <app-skeleton-card class="card"></app-skeleton-card>
+            }
         }
-        @empty {
-            <p>Nessuna challenge trovata.</p>
-        }
+        @empty { <p>Nessuna challenge trovata.</p> }
     </div>
 </div>

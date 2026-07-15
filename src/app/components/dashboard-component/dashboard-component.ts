@@ -3,10 +3,12 @@ import { ChallengeCardComponent } from '../challenge-card-component/challenge-ca
 import { ChallengeService } from '../../services/challenge-service';
 import { Challenge } from '../../models/challenge';
 import { ChallengeForm } from "../challenge-form/challenge-form";
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { SkeletonCard } from '../skeleton-card/skeleton-card';
 
 @Component({
   selector: 'app-dashboard-component',
-  imports: [ChallengeCardComponent, ChallengeForm],
+  imports: [ChallengeCardComponent, ChallengeForm, MatProgressSpinnerModule, SkeletonCard],
   templateUrl: './dashboard-component.html',
   styleUrl: './dashboard-component.css',
 })

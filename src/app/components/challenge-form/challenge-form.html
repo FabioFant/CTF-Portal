@@ -1,28 +1,20 @@
+<h2>Challenge form</h2>
 <form>
-  <h2>Challenge form</h2>
-  <mat-form-field> 
-    <mat-label>Title</mat-label>
-    <input matInput placeholder="Challenge" [(ngModel)]="newChallenge.title" name="title" id="title"
-     [(ngModel)]="newChallenge.title"/>
-  </mat-form-field>
-  <mat-form-field> 
-    <mat-label>Category</mat-label>
-    <input matInput placeholder="WEB" name="category" id="category"
-     [(ngModel)]="newChallenge.category"/>
-  </mat-form-field>
-  <mat-form-field>
-    <mat-label>Points</mat-label>
-    <input matInput placeholder="100" type="number" id="points" name="points"
-    [(ngModel)]="newChallenge.points">
-  </mat-form-field>
   <div>
-    <input class="form-check-input" type="checkbox" name="includeDate" id="includeDate" [(ngModel)]="includeDate">
-    <label class="form-check-label" for="includeDate">
-      Include Date
-    </label>
+    <mat-form-field>
+      <mat-label>Title</mat-label>
+      <input matInput placeholder="Challenge" [(ngModel)]="newChallenge.title" name="title" id="title"
+        [(ngModel)]="newChallenge.title" />
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Category</mat-label>
+      <input matInput placeholder="WEB" name="category" id="category" [(ngModel)]="newChallenge.category" />
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Points</mat-label>
+      <input matInput placeholder="100" type="number" id="points" name="points" [(ngModel)]="newChallenge.points">
+    </mat-form-field>
   </div>
-  <button (click)="addChallenge()" type="button" class="btn btn-primary">Add Challenge</button>
-  @if (errorOccured()) {
-    <app-error-message class="mt-2" [message]="'Invalid challenge.'"></app-error-message>
-  }
+  <mat-checkbox name="includeDate" id="includeDate" [(ngModel)]="includeDate">Include Date</mat-checkbox>
+  <button matButton="filled" (click)="addChallenge()" type="button">Add Challenge</button>
 </form>
