@@ -1,13 +1,13 @@
-<mat-card appearance="outlined">
+<mat-card [routerLink]="['/challenge', challenge().id]" appearance="outlined">
   <mat-card-header>
     <mat-card-title>{{ challenge().title }}</mat-card-title>
     <mat-card-subtitle>{{ challenge().points }}</mat-card-subtitle>
   </mat-card-header>
   <mat-card-content>
     @if (challenge().solved) {
-      <p style="color: green">Solved</p>
+      <p class="green">Solved</p>
     } @else {
-      <p style="color: red">Not solved</p>
+      <p class="red">Not solved</p>
     }
     @if (challenge().dateAdded) {
       <p>{{ challenge().dateAdded | date: 'dd/MM/yyyy' }}</p>
@@ -22,6 +22,6 @@
     </mat-chip-set>
   </mat-card-footer>
   <mat-card-actions>
-    <button matButton="filled" (click)="challengeSolved()">Solve</button>
+    <button matButton="filled" (click)="challengeSolved(); $event.stopImmediatePropagation()">Solve</button>
   </mat-card-actions>
 </mat-card>

@@ -1,0 +1,30 @@
+.green {
+    color: green;
+}
+
+.red {
+    color: red;
+}
+
+.title {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 0 20%;
+}
+
+button {
+    margin: 1.5rem 25%;
+    width: auto;
+}
+
+mat-chip {
+    margin-left: 13px;
+    margin-top: 13px;
+}

@@ -1,9 +1,10 @@
 import { Component, signal } from '@angular/core';
-import { DashboardComponent } from "./components/dashboard-component/dashboard-component";
+import { RouterOutlet, RouterLink } from '@angular/router';
+import { Navbar } from './components/navbar/navbar';
 
 @Component({
   selector: 'app-root',
-  imports: [DashboardComponent],
+  imports: [RouterOutlet, Navbar],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })

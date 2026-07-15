@@ -12,6 +12,10 @@ export class ChallengeService {
     return this.challenges.asReadonly();
   }
 
+  getChallengeById(id : number): Challenge | undefined {
+    return this.challenges().find((challenge) => challenge.id === id);
+  }
+
   addChallenge(challenge: Challenge, includeDate: boolean): boolean {
     if(!challenge || !challenge.title || !challenge.category || !challenge.points) {
       return false;

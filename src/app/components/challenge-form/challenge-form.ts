@@ -33,10 +33,14 @@ export class ChallengeForm {
 
   addChallenge() {
     if (this.challengeService.addChallenge({ ...this.newChallenge }, this.includeDate)) {
-      this.snackBar.open(`Challenge "${this.newChallenge.title}" added.`, "Close");
+      this.snackBar.open(`Challenge "${this.newChallenge.title}" added.`, "Close", {
+        duration: 3000,
+      });
     }
     else {
-      this.snackBar.open("Invalid challenge.", "Close");
+      this.snackBar.open("Invalid challenge.", "Close", {
+        duration: 3000,
+      });
     }
     this.resetForm();
   }
