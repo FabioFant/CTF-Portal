@@ -1,6 +1,9 @@
 <div class="title">
     <h1>{{ challenge.title }}</h1>
     <mat-chip>{{ challenge.category | uppercase }}</mat-chip>
+    <button mat-icon-button text="" [appCopyToClipboard]="challenge.title">
+        <mat-icon>content_copy</mat-icon>
+    </button>
 </div>
 <h2>{{ challenge.points | difficulty }} -
     @if (challenge.solved) {

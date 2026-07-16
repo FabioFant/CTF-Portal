@@ -7,10 +7,12 @@ import { CommonModule } from '@angular/common';
 import {MatExpansionModule} from '@angular/material/expansion';
 import { MatButtonModule } from '@angular/material/button';
 import { DifficultyPipe } from '../../pipes/difficulty-pipe';
+import { CopyDirective } from '../../directives/copy-directive';
+import {MatIconModule} from '@angular/material/icon';
 
 @Component({
   selector: 'app-challenge-details',
-  imports: [MatChipsModule, CommonModule, MatExpansionModule, MatButtonModule, DifficultyPipe],
+  imports: [MatChipsModule, CommonModule, MatExpansionModule, MatButtonModule, DifficultyPipe, CopyDirective, MatIconModule],
   templateUrl: './challenge-details.html',
   styleUrl: './challenge-details.css',
 })
