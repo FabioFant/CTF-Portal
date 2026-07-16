@@ -2,11 +2,13 @@
     <h1>{{ challenge.title }}</h1>
     <mat-chip>{{ challenge.category | uppercase }}</mat-chip>
 </div>
-@if (challenge.solved) {
-<h2 class="green">Solved</h2>
-} @else {
-<h2 class="red">Not solved</h2>
-}
+<h2>{{ challenge.points | difficulty }} -
+    @if (challenge.solved) {
+    <span class="green">Solved</span>
+    } @else {
+    <span class="red">Not solved</span>
+    }
+</h2>
 <div class="content">
     <p>
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime voluptates sapiente dolore

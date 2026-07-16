@@ -25,11 +25,9 @@ const defaultForm : Challenge = {
 export class ChallengeForm {
   newChallenge : Challenge = { ...defaultForm };
   includeDate : boolean = false;
+
   snackBar = inject(MatSnackBar);
-
-  constructor(private challengeService: ChallengeService) {
-
-  }
+  challengeService = inject(ChallengeService);
 
   addChallenge() {
     if (this.challengeService.addChallenge({ ...this.newChallenge }, this.includeDate)) {

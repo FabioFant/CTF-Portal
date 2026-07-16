@@ -1,7 +1,7 @@
 <mat-card [routerLink]="['/challenge', challenge().id]" appearance="outlined">
   <mat-card-header>
     <mat-card-title>{{ challenge().title }}</mat-card-title>
-    <mat-card-subtitle>{{ challenge().points }}</mat-card-subtitle>
+    <mat-card-subtitle>{{ challenge().points | difficulty}}</mat-card-subtitle>
   </mat-card-header>
   <mat-card-content>
     @if (challenge().solved) {

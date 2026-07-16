@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { Challenge } from '../../models/challenge';
 import { ChallengeService } from '../../services/challenge-service';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -6,19 +6,20 @@ import {MatChipsModule} from '@angular/material/chips';
 import { CommonModule } from '@angular/common';
 import {MatExpansionModule} from '@angular/material/expansion';
 import { MatButtonModule } from '@angular/material/button';
+import { DifficultyPipe } from '../../pipes/difficulty-pipe';
 
 @Component({
   selector: 'app-challenge-details',
-  imports: [MatChipsModule, CommonModule, MatExpansionModule, MatButtonModule],
+  imports: [MatChipsModule, CommonModule, MatExpansionModule, MatButtonModule, DifficultyPipe],
   templateUrl: './challenge-details.html',
   styleUrl: './challenge-details.css',
 })
 export class ChallengeDetails {
   challenge! : Challenge
 
-  constructor(private challengeService : ChallengeService, private route : ActivatedRoute, private router : Router) {
-
-  }
+  challengeService = inject(ChallengeService);
+  route = inject(ActivatedRoute);
+  router = inject(Router);
 
   ngOnInit() {
     const id = Number(this.route.snapshot.paramMap.get('id'));
