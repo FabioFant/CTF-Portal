@@ -3,6 +3,10 @@ import { DashboardComponent } from './components/dashboard-component/dashboard-c
 import { ChallengeForm } from './components/challenge-form/challenge-form';
 import { ChallengeDetails } from './components/challenge-details/challenge-details';
 import { NotFound } from './components/not-found/not-found';
+import { LoginPageComponent } from './components/login-page-component/login-page-component';
+import { authGuard } from './guards/auth-guard';
+import { adminGuard } from './guards/admin-guard';
+import { userGuard } from './guards/user-guard';
 
 export const routes: Routes = [
     {
@@ -11,16 +15,24 @@ export const routes: Routes = [
         pathMatch: "full"
     },
     {
+        path: 'login',
+        component: LoginPageComponent,
+        canActivate: [userGuard]
+    },
+    {
         path: 'dashboard',
-        component: DashboardComponent
+        component: DashboardComponent,
+        canActivate: [authGuard]
     },
     {
         path: 'add-challenge',
-        component: ChallengeForm
+        component: ChallengeForm,
+        canActivate: [authGuard, adminGuard]
     },
     {
         path: 'challenge/:id',
-        component: ChallengeDetails
+        component: ChallengeDetails,
+        canActivate: [authGuard]
     },
     {
         path: '**',

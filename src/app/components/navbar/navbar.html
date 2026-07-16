@@ -1,8 +1,22 @@
 <mat-toolbar>
-  <span routerLink="" class="title">CTF Checker</span>
+  <span routerLink="" class="title">
+    CTF Checker
+    @if (isAdmin()) {
+      - Admin
+    }
+  </span>
 
   <span class="spacer"></span>
 
   <a routerLink="dashboard" mat-button>Dashboard</a>
   <a routerLink="add-challenge" mat-button>Add challenge</a>
+  @if (isAdmin()) {
+    <button matButton="filled" (click)="revokeAdmin()">Revoke admin</button>
+  } @else {
+    <button matButton="filled" (click)="becomeAdmin()">Become admin</button>
+  }
+  
+  <button matIconButton (click)="logout()">
+    <mat-icon>logout</mat-icon>
+  </button>
 </mat-toolbar>
