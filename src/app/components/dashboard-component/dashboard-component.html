@@ -1,4 +1,5 @@
 <h1>Challenges dashboard</h1>
+<h2>{{ ctf_config.name }} - {{ ctf_config.year }}</h2>
 <div class="challenges">
     @for (c of challenges(); track c.id) {
         @defer (on viewport) {

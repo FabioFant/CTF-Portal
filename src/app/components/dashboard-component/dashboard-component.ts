@@ -1,9 +1,9 @@
 import { Component, inject, Signal } from '@angular/core';
 import { ChallengeCardComponent } from '../challenge-card-component/challenge-card-component';
 import { ChallengeService } from '../../services/challenge-service';
-import { Challenge } from '../../models/challenge';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { SkeletonCard } from '../skeleton-card/skeleton-card';
+import { CTF_CONFIG } from '../../config/ctf.config';
 
 @Component({
   selector: 'app-dashboard-component',
@@ -12,6 +12,7 @@ import { SkeletonCard } from '../skeleton-card/skeleton-card';
   styleUrl: './dashboard-component.css',
 })
 export class DashboardComponent {
+  ctf_config = inject(CTF_CONFIG);
   challengeService = inject(ChallengeService);
   challenges = this.challengeService.getChallenges();
 
