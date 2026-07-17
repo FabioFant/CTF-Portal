@@ -9,7 +9,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     min-width: 12rem;
     height: 15rem;
 }
-h1, h2{
+h1, h2, h3{
     display: flex;
     justify-content: center;
 }

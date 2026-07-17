@@ -1,13 +1,20 @@
 <h1>Challenges dashboard</h1>
 <h2>{{ ctf_config.name }} - {{ ctf_config.year }}</h2>
+<h3>Total Points: {{ totalPoints() }} - Total Solved: {{ totalChallengeSolved() }}</h3>
 <div class="challenges">
-    @for (c of challenges(); track c.id) {
-        @defer (on viewport) {
-            <app-challenge-card-component class="card" [challenge]="c"
-                (onSolved)="challengeSolved($event)"></app-challenge-card-component>
-        } @placeholder {
-            <app-skeleton-card class="card"></app-skeleton-card>
+    @if (challengeResource.status() === 'resolved') {
+        @for (c of challengeResource.value(); track c.id) {
+            @defer (on viewport) {
+                <app-challenge-card-component class="card" [challenge]="c"
+                    (onSolved)="challengeSolved($event)"></app-challenge-card-component>
+            } @placeholder {
+                <app-skeleton-card class="card"></app-skeleton-card>
+            }
         }
+        @empty { <p>No challenge found.</p> }
+    } @else if(challengeResource.status() === 'loading') {
+        <p>Loading challenges...</p>
+    } @else if(challengeResource.status() === 'error') {
+        <p>Error while loading challenges.</p>
     }
-    @empty { <p>Nessuna challenge trovata.</p> }
 </div>

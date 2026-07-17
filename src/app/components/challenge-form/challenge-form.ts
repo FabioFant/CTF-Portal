@@ -30,7 +30,7 @@ export class ChallengeForm {
   challengeService = inject(ChallengeService);
 
   addChallenge() {
-    if (this.challengeService.addChallenge({ ...this.newChallenge }, this.includeDate)) {
+    if (this.challengeService.addChallengee({ ...this.newChallenge }, this.includeDate)) { // TODO : Modify
       this.snackBar.open(`Challenge "${this.newChallenge.title}" added.`, "Close", {
         duration: 3000,
       });

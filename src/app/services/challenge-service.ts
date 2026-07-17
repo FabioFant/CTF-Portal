@@ -1,4 +1,4 @@
-import { Injectable, signal, Signal } from '@angular/core';
+import { Injectable, signal } from '@angular/core';
 import { Challenge } from '../models/challenge';
 import { MOCK_CHALLENGES } from '../mocks/mock-challenges';
 
@@ -8,15 +8,27 @@ import { MOCK_CHALLENGES } from '../mocks/mock-challenges';
 export class ChallengeService {
   private challenges = signal<Challenge[]>(MOCK_CHALLENGES);
 
-  getChallenges(): Signal<Challenge[]> {
-    return this.challenges.asReadonly();
+  private delay(ms: number) { // Fake delay
+    return new Promise(resolve => setTimeout(resolve, ms));
   }
 
-  getChallengeById(id : number): Challenge | undefined {
+  async getChallenges(): Promise<Challenge[]> {
+    await this.delay(1500);
+    return this.challenges(); 
+  }
+
+  async getChallengeById(id: number): Promise<Challenge | undefined> {
+    await this.delay(1000);
     return this.challenges().find((challenge) => challenge.id === id);
   }
 
-  addChallenge(challenge: Challenge, includeDate: boolean): boolean {
+  getChallengeByIdd(id: number): Challenge | undefined {
+    return this.challenges().find((challenge) => challenge.id === id);
+  }
+
+  async addChallenge(challenge: Challenge, includeDate: boolean): Promise<boolean> {
+    await this.delay(1500); 
+
     if(!challenge || !challenge.title || !challenge.category || !challenge.points) {
       return false;
     }
@@ -26,15 +38,31 @@ export class ChallengeService {
     challenge.id = this.challenges().length + 1;
 
     this.challenges.update(currentChallenges => [...currentChallenges, challenge]);
-    return true
+    return true;
   }
 
-  solveChallenge(idGiven: number) {
+  addChallengee(challenge: Challenge, includeDate: boolean): boolean { 
+
+    if(!challenge || !challenge.title || !challenge.category || !challenge.points) {
+      return false;
+    }
+
+    if(includeDate) challenge.dateAdded = new Date();
+    challenge.solved = false;
+    challenge.id = this.challenges().length + 1;
+
+    this.challenges.update(currentChallenges => [...currentChallenges, challenge]);
+    return true;
+  }
+
+  async solveChallenge(idGiven: number): Promise<void> {
+    await this.delay(800);
+    
     this.challenges.update(currentChallenges => 
       currentChallenges.map( challenge => {
-        if(challenge.id === idGiven) challenge.solved = true
-        return challenge
+        if(challenge.id === idGiven) challenge.solved = true;
+        return challenge;
       })
-    )
+    );
   }
 }

@@ -1,4 +1,4 @@
-import { Component, input, output } from '@angular/core';
+import { Component, input, output, inject } from '@angular/core';
 import { Challenge } from '../../models/challenge';
 import { CommonModule } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
@@ -15,12 +15,9 @@ import { DifficultyPipe } from '../../pipes/difficulty-pipe';
   styleUrl: './challenge-card-component.css',
 })
 export class ChallengeCardComponent {
+  challengeService = inject(ChallengeService);
   challenge = input.required<Challenge>();
   onSolved = output<number>();
-
-  constructor(private challengeService : ChallengeService) {
-
-  }
 
   challengeSolved() {
     this.onSolved.emit(this.challenge().id);

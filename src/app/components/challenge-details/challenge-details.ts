@@ -25,7 +25,7 @@ export class ChallengeDetails {
 
   ngOnInit() {
     const id = Number(this.route.snapshot.paramMap.get('id'));
-    const c = this.challengeService.getChallengeById(id);
+    const c = this.challengeService.getChallengeByIdd(id); // TODO : Modify
     if (c) this.challenge = c;
     else this.router.navigate(['/not-found']);
   }
