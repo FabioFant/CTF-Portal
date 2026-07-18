@@ -22,26 +22,8 @@ export class ChallengeService {
     return this.challenges().find((challenge) => challenge.id === id);
   }
 
-  getChallengeByIdd(id: number): Challenge | undefined {
-    return this.challenges().find((challenge) => challenge.id === id);
-  }
-
   async addChallenge(challenge: Challenge, includeDate: boolean): Promise<boolean> {
     await this.delay(1500); 
-
-    if(!challenge || !challenge.title || !challenge.category || !challenge.points) {
-      return false;
-    }
-
-    if(includeDate) challenge.dateAdded = new Date();
-    challenge.solved = false;
-    challenge.id = this.challenges().length + 1;
-
-    this.challenges.update(currentChallenges => [...currentChallenges, challenge]);
-    return true;
-  }
-
-  addChallengee(challenge: Challenge, includeDate: boolean): boolean { 
 
     if(!challenge || !challenge.title || !challenge.category || !challenge.points) {
       return false;

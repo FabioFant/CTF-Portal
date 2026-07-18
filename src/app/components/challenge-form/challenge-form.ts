@@ -29,8 +29,9 @@ export class ChallengeForm {
   snackBar = inject(MatSnackBar);
   challengeService = inject(ChallengeService);
 
-  addChallenge() {
-    if (this.challengeService.addChallengee({ ...this.newChallenge }, this.includeDate)) { // TODO : Modify
+  async addChallenge() {
+    const success = await this.challengeService.addChallenge(this.newChallenge, this.includeDate);
+    if (success) { 
       this.snackBar.open(`Challenge "${this.newChallenge.title}" added.`, "Close", {
         duration: 3000,
       });

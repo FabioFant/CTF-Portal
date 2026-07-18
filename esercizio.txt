@@ -62,8 +62,8 @@
 
 --------
 
-- Eliminare i metodi temporanei di challenge service 
-- Modificare tutti i componenti che richiedono dati al service seguendo i nuovi metodi
+o Eliminare i metodi temporanei di challenge service 
+o Modificare tutti i componenti che richiedono dati al service seguendo i nuovi metodi
 - Applicare Smart vs Dumb component pattern e controllare che vada tutto
 - Continuare con i punti 2, 3 e 4
 - Migliorare l'interfaccia, togliere il "debug" per le guard

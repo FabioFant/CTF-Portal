@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, input, resource } from '@angular/core';
 import { Challenge } from '../../models/challenge';
 import { ChallengeService } from '../../services/challenge-service';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -17,20 +17,23 @@ import {MatIconModule} from '@angular/material/icon';
   styleUrl: './challenge-details.css',
 })
 export class ChallengeDetails {
-  challenge! : Challenge
-
   challengeService = inject(ChallengeService);
   route = inject(ActivatedRoute);
   router = inject(Router);
 
-  ngOnInit() {
-    const id = Number(this.route.snapshot.paramMap.get('id'));
-    const c = this.challengeService.getChallengeByIdd(id); // TODO : Modify
-    if (c) this.challenge = c;
-    else this.router.navigate(['/not-found']);
-  }
+  id = input<number>();
+  challengeResource = resource({
+    params: () => this.id(),
+    loader: async ({ params }) => {
+      if(!params) return undefined;
+
+      return this.challengeService.getChallengeById(params);
+    }
+  })
 
   solveChallenge() {
-    this.challengeService.solveChallenge(this.challenge.id);
+    const challenge = this.challengeResource.value();
+    if (challenge) 
+      this.challengeService.solveChallenge(challenge.id);
   }
 }
