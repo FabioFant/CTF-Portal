@@ -4,20 +4,33 @@ import { ChallengeService } from '../../services/challenge-service';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { SkeletonCard } from '../skeleton-card/skeleton-card';
 import { CTF_CONFIG } from '../../config/ctf.config';
-import { Challenge } from '../../models/challenge';
+import { SearchBarComponent } from '../search-bar-component/search-bar-component';
 
 @Component({
   selector: 'app-dashboard-component',
-  imports: [ChallengeCardComponent, MatProgressSpinnerModule, SkeletonCard],
+  imports: [ChallengeCardComponent, MatProgressSpinnerModule, SkeletonCard, SearchBarComponent],
   templateUrl: './dashboard-component.html',
   styleUrl: './dashboard-component.css',
 })
-export class DashboardComponent {
+export class DashboardComponent { // Smart
   ctf_config = inject(CTF_CONFIG);
   challengeService = inject(ChallengeService);
 
+  searchChallenge = signal<string>('');
+
   challengeResource = resource({
     loader: () => { return this.challengeService.getChallenges(); }
+  })
+
+  filteredChallenges = computed(() => {
+    const challenges = this.challengeResource.value() ?? []
+    const searchQuery = this.searchChallenge().toLowerCase();
+
+    if(!searchQuery) {
+      return challenges
+    }
+
+    return challenges.filter(challenge => challenge.title.toLowerCase().includes(searchQuery))
   })
 
   totalPoints = computed(() => {
@@ -34,5 +47,6 @@ export class DashboardComponent {
 
   challengeSolved(id: number) {
     this.challengeService.solveChallenge(id);
+    this.challengeResource.reload();
   }
 }

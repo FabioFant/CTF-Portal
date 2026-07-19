@@ -1,0 +1,14 @@
+<mat-form-field>
+  <mat-label>
+    <ng-content select="[search-bar-label]">
+        Search
+    </ng-content>
+  </mat-label>
+  <input matInput type="text" [(ngModel)]="text">
+  @if (text()) {
+    <button matSuffix matIconButton aria-label="Clear" (click)="text.set('')">
+      <mat-icon>close</mat-icon>
+    </button>
+  }
+</mat-form-field>
+

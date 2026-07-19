@@ -14,13 +14,11 @@ import { DifficultyPipe } from '../../pipes/difficulty-pipe';
   templateUrl: './challenge-card-component.html',
   styleUrl: './challenge-card-component.css',
 })
-export class ChallengeCardComponent {
-  challengeService = inject(ChallengeService);
+export class ChallengeCardComponent { // Dumb
   challenge = input.required<Challenge>();
-  onSolved = output<number>();
+  solved = output<number>();
 
-  challengeSolved() {
-    this.onSolved.emit(this.challenge().id);
-    //this.challengeService.solveChallenge(this.challenge().id); <-- cleaner, thanks to signals we can omess output
+  solveChallenge() {
+    this.solved.emit(this.challenge().id);
   }
 }

@@ -1,4 +1,7 @@
 :host {
-    background-color: lightgrey;
+    display: block;
+    width: 18rem;  /* Uguale alle dimensioni della card vera */
+    height: 15rem; /* Uguale alle dimensioni della card vera */
+    background-color: gray;
     border-radius: 16px;
 }

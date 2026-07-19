@@ -1,4 +1,4 @@
-import { Injectable, inject, PLATFORM_ID } from '@angular/core';
+import { Injectable, inject, PLATFORM_ID, signal } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 
 @Injectable({
@@ -6,31 +6,31 @@ import { isPlatformBrowser } from '@angular/common';
 })
 export class AuthenticationService { // fake auth service
   // should use localStorage
-  logged = false;
-  admin = false;
+  logged = signal<boolean>(false);
+  admin = signal<boolean>(false);
 
   becomeAdmin() {
-    if(this.logged) this.admin = true;
+    if(this.logged()) this.admin.set(true);
   }
 
   isAdmin(): boolean {
-    return this.admin;
+    return this.admin();
   }
 
   revokeAdmin() {
-    this.admin = false;
+    this.admin.set(false);
   }
 
   login() {
-    this.logged = true;
+    this.logged.set(true);
   }
 
   isLogged(): boolean {
-    return this.logged;
+    return this.logged();
   }
 
   logout() {
-    this.logged = false;
-    this.admin = false;
+    this.logged.set(false);
+    this.admin.set(false);
   }
 }

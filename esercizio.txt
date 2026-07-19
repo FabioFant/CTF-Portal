@@ -1,37 +1,3 @@
-
----
-
-
-### Missione 1: La Dashboard Automatica (`resource` e `computed`)
-
-**L'obiettivo:** Trasformare il caricamento dati e le statistiche della `DashboardComponent` in un flusso completamente reattivo, eliminando `ngOnInit` e variabili booleane di stato.
-
-**Le specifiche:**
-
-1. Rimuovi qualsiasi array statico o chiamata manuale al `ChallengeService`.
-2. Dichiara un `resource` che si occupi autonomamente di invocare il metodo di recupero delle challenge dal tuo servizio.
-3. Crea due `computed` distinti che si basino sul valore restituito dal `resource`:
-* Il primo deve calcolare e restituire la somma totale dei punti (solo delle challenge con flag catturata / `solved`).
-* Il secondo deve restituire una stringa o un oggetto che rappresenti il contatore delle challenge completate rispetto al totale (es. "3 / 10").
-
-
-4. Nel template HTML, gestisci l'interfaccia mostrando una scritta "Caricamento in corso..." finché il `resource` sta lavorando, e mostra la lista e le statistiche solo quando i dati sono pronti.
-
----
-
-### Missione 2: Il Filtro Bidirezionale (`model`)
-
-**L'obiettivo:** Creare un componente di ricerca riutilizzabile che comunichi in modo fluido con il componente padre senza usare valanghe di `input` e `output` separati.
-
-**Le specifiche:**
-
-1. Crea un nuovo componente figlio chiamato `SearchBarComponent`.
-2. Al suo interno, dichiara un `model` (di tipo stringa, vuoto di default) che rappresenterà il testo cercato dall'utente.
-3. Nel template del figlio, collega questo `model` a un tag `<input>` nativo usando il two-way binding di Angular.
-4. Nel componente padre (`DashboardComponent`), istanzia la `<app-search-bar>`, aggancia il `model` a un tuo Signal locale e usalo per filtrare visivamente la lista delle macchine mostrate a schermo.
-
----
-
 ### Missione 3: La Sandbox di Modifica (`linkedSignal`)
 
 **L'obiettivo:** Gestire lo stato di un form in modo sicuro. Quando apri una challenge in modifica, i dati non devono sovrascrivere l'originale finché non salvi, e se cambi challenge, il form deve resettarsi da solo.
@@ -58,13 +24,4 @@
 4. All'interno dell'effetto, inserisci due comportamenti che devono scattare in automatico:
 * Cambiare dinamicamente il `document.title` della scheda del browser scrivendoci "Modifica: [Nome Challenge]" oppure "Nuova Challenge".
 * Imporre il focus automatico (`.focus()`) sul campo di testo nativo che hai catturato con `viewChild`, in modo che l'utente possa iniziare subito a digitare senza dover cliccare con il mouse.
-
-
---------
-
-o Eliminare i metodi temporanei di challenge service 
-o Modificare tutti i componenti che richiedono dati al service seguendo i nuovi metodi
-- Applicare Smart vs Dumb component pattern e controllare che vada tutto
-- Continuare con i punti 2, 3 e 4
-- Migliorare l'interfaccia, togliere il "debug" per le guard
 
