@@ -1,5 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
+using Backend.Models;
+using Backend.Data;
 using Backend.Models.Dto;
+using Microsoft.EntityFrameworkCore;
 
 namespace Backend.Controllers;
 
@@ -7,10 +10,29 @@ namespace Backend.Controllers;
 [Route("api/[controller]")]
 public class ChallengeController : ControllerBase
 {
-    [HttpGet]
-    [ProducesResponseType(StatusCodes.Status200OK)]
-    public ActionResult<List<ChallengeCardDto>> GetChallenges()
+    private readonly BackendContext _context;
+    public ChallengeController(BackendContext context)
     {
-        return null;
+        _context = context;
     }
+
+    [HttpGet]
+    public async Task<ActionResult<List<ChallengeCardDto>>> GetChallenges()
+    {
+        List<ChallengeCardDto> cards = await _context.Challenges
+            .Select(challenge => new ChallengeCardDto
+            {
+                Id = challenge.Id,
+                Title = challenge.Title,
+                Category = challenge.Category,
+                Points = challenge.Points,
+                Date = challenge.Date
+            })
+            .ToListAsync();
+
+        return Ok(cards);
+    }
+
+    [HttpGet("{id}")]
+    public async Task<ActionResult<ChallengeDetailsDto>> GetChallenge()
 }
