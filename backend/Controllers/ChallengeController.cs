@@ -34,5 +34,27 @@ public class ChallengeController : ControllerBase
     }
 
     [HttpGet("{id}")]
-    public async Task<ActionResult<ChallengeDetailsDto>> GetChallenge()
+    public async Task<ActionResult<ChallengeDetailsDto>> GetChallenge([FromRoute] int id)
+    {
+        ChallengeDetailsDto? details = await _context.Challenges
+        .Select(challenge => new ChallengeDetailsDto
+        {
+            Id = challenge.Id,
+            Title = challenge.Title,
+            Category = challenge.Category,
+            Points = challenge.Points,
+            Date = challenge.Date,
+            Description = challenge.Description,
+            Hints = challenge.Hints.Select(hint => new ChallengeHintDto { Id = hint.Id, Content = hint.Content }).ToList(),
+        })
+        .Where(challenge => challenge.Id == id)
+        .FirstOrDefaultAsync();
+
+        if(details == null)
+        {
+            return NotFound();
+        }
+        
+        return Ok(details);
+    }
 }

@@ -5,6 +5,6 @@ public class ChallengeCardDto
     public int Id { get; set; }
     public required string Title { get; set; }
     public required string Category { get; set; }
-    public int Points { get; set; }
+    public required int Points { get; set; }
     public DateOnly? Date { get; set; }
 }
