@@ -5,14 +5,16 @@ using Backend.Data;
 using Backend.Controllers;
 using Backend.Models;
 
-namespace Backend.Tests;
+namespace Backend.Tests.Controllers;
 
 public class ChallengeControllerTests
 {
     #region Private Methods
-    private (ChallengeController, BackendContext) _Arrange(string databaseName)
+    private (ChallengeController, BackendContext) _Arrange()
     {
-        var options = new DbContextOptionsBuilder<BackendContext>().UseInMemoryDatabase(databaseName).Options;
+        var options = new DbContextOptionsBuilder<BackendContext>()
+            .UseInMemoryDatabase(Guid.NewGuid().ToString())
+            .Options;
         BackendContext context = new BackendContext(options);
         var controller = new ChallengeController(context);  
         return (controller, context);
@@ -53,10 +55,10 @@ public class ChallengeControllerTests
 
     #region GetChallenges
     [Fact]
-    public async Task GetChallenges_EmptyDatabase_EmptyOutput()
+    public async Task GetChallenges_EmptyDatabase_OkEmptyOutput()
     {
         // Arrange
-        var (controller, _) = _Arrange("GetChallenges_Empty");
+        var (controller, _) = _Arrange();
 
         // Act
         var result = await controller.GetChallenges();
@@ -67,10 +69,10 @@ public class ChallengeControllerTests
     }
 
     [Fact]
-    public async Task GetChallenges_FilledDatabase_FullChallenge()
+    public async Task GetChallenges_FilledDatabase_OkFullChallenge()
     {
         // Arrange
-        var (controller, context) = _Arrange("GetChallenges_Filled_Full");
+        var (controller, context) = _Arrange();
 
         Challenge chall = _GetFullChallenge();
         context.Add(chall);
@@ -88,10 +90,10 @@ public class ChallengeControllerTests
     }
 
     [Fact]
-    public async Task GetChallenges_FilledDatabase_PartialChallenge()
+    public async Task GetChallenges_FilledDatabase_OkPartialChallenge()
     {
         // Arrange
-        var (controller, context) = _Arrange("GetChallenges_Filled_Partial");
+        var (controller, context) = _Arrange();
 
         Challenge chall = _GetPartialChallenge();
         context.Add(chall);
@@ -112,10 +114,10 @@ public class ChallengeControllerTests
 
     #region GetChallenge
     [Fact]
-    public async Task GetChallenge_OneFullChallenge_OneOutput()
+    public async Task GetChallenge_FullChallenge_Ok()
     {
         // Arrange
-        var (controller, context) = _Arrange("GetChallenge_Full_OneOutput");   
+        var (controller, context) = _Arrange();   
 
         Challenge chall = _GetFullChallenge();
         context.Add(chall);
@@ -133,7 +135,7 @@ public class ChallengeControllerTests
     public async Task GetChallenge_InvalidId_NotFound()
     {
         // Arrange
-        var (controller, context) = _Arrange("GetChallenge_InvalidId");   
+        var (controller, context) = _Arrange();   
 
         Challenge chall = _GetFullChallenge();
         context.Add(chall);
@@ -147,10 +149,10 @@ public class ChallengeControllerTests
     }
 
     [Fact]
-    public async Task GetChallenge_OnePartialChallenge_OneOutput()
+    public async Task GetChallenge_PartialChallenge_Ok()
     {
         // Arrange
-        var (controller, context) = _Arrange("GetChallenge_Partial_OneOutput");   
+        var (controller, context) = _Arrange();   
 
         Challenge chall = _GetPartialChallenge();
         context.Add(chall);

@@ -10,4 +10,5 @@ public class Challenge
     public required string Description { get; set; }
     public List<ChallengeHint> Hints { get; set; } = new();
     public required string Flag { get; set; }
+    public List<User> SolvedByUsers { get; set; } = new();
 }
