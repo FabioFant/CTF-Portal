@@ -105,7 +105,7 @@ public class AuthenticationControllerTests
     }
 
     [Fact]
-    public async Task Register_ValidDto_Ok()
+    public async Task Register_ValidDto_Created()
     {
         // Arrange
         var (controller, context) = _Arrange();
@@ -119,7 +119,7 @@ public class AuthenticationControllerTests
         var result = await controller.Register(request);
 
         // Assert
-        result.Should().BeOfType<OkResult>();
+        result.Should().BeOfType<CreatedResult>();
 
         User? user = await context.Users
             .Where(u => u.Username == request.Username)
@@ -146,7 +146,7 @@ public class AuthenticationControllerTests
         var result = await controller.Register(request);
 
         // Assert
-        result.Should().BeOfType<OkResult>();
+        result.Should().BeOfType<CreatedResult>();
 
         User? user = await context.Users
             .Where(u => u.Username == request.Username)

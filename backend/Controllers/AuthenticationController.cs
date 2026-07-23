@@ -73,7 +73,7 @@ public class AuthenticationController : ControllerBase
         });
         await _context.SaveChangesAsync();
 
-        return Ok();
+        return Created();
     }
 
     [HttpPost("login")]

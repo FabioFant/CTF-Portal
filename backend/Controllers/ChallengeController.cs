@@ -3,9 +3,11 @@ using Backend.Models;
 using Backend.Data;
 using Backend.Models.Dto;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Backend.Controllers;
 
+[Authorize]
 [ApiController]
 [Route("api/[controller]")]
 public class ChallengeController : ControllerBase
@@ -56,5 +58,28 @@ public class ChallengeController : ControllerBase
         }
         
         return Ok(details);
+    }
+
+    [Authorize(Roles = "Admin")]
+    [HttpPost("AddChallenge")]
+    public async Task<ActionResult> AddChallenge(AddChallengeRequestDto challenge)
+    {
+        await _context.AddAsync(
+            new Challenge
+            {
+                Title = challenge.Title,
+                Category = challenge.Category,
+                Points = challenge.Points,
+                Description = challenge.Description,
+                Flag = challenge.Flag,
+                Hints = challenge.Hints?
+                    .Select(h => new ChallengeHint { Content = h.Content }).ToList()
+                    ?? new List<ChallengeHint>(),
+                Date = challenge.Date
+            }
+        );
+        await _context.SaveChangesAsync();
+
+        return Created();
     }
 }
