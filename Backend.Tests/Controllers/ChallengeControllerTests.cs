@@ -7,18 +7,16 @@ using Backend.Data;
 using Backend.Controllers;
 using Backend.Models;
 using Backend.Models.Dto;
+using Backend.Tests.Helper;
 
 namespace Backend.Tests.Controllers;
 
-public class ChallengeControllerTests
+public class ChallengeControllerTests : TestSettingsBase
 {
     #region Private Methods
     private (ChallengeController, BackendContext) _Arrange(bool isLogged = false, bool isAdmin = false)
     {
-        var options = new DbContextOptionsBuilder<BackendContext>()
-            .UseInMemoryDatabase(Guid.NewGuid().ToString())
-            .Options;
-        BackendContext context = new BackendContext(options);
+        BackendContext context = GetContext();
         var controller = new ChallengeController(context);  
 
         if (isLogged)

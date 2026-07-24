@@ -58,7 +58,7 @@ public class AuthenticationController : ControllerBase
     [HttpPost("register")]
     public async Task<ActionResult> Register(RegisterRequestDto request)
     {
-        var validationResult = await _registerValidator.ValidateAsync(request);
+        var validationResult = _registerValidator.Validate(request);
         if(!validationResult.IsValid)
         {
             return BadRequest(validationResult.ToDictionary());
@@ -79,7 +79,7 @@ public class AuthenticationController : ControllerBase
     [HttpPost("login")]
     public async Task<ActionResult> Login(LoginRequestDto request)
     {
-        var validationResult = await _loginValidator.ValidateAsync(request);
+        var validationResult = _loginValidator.Validate(request);
         if (!validationResult.IsValid)
         {
             return BadRequest(validationResult.ToDictionary());
